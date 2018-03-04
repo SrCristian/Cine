@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>CineCristian</title>
+    
+    <!-- BOOTSTRAP -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- BOOTSTRAP -->
+
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+
+    <script type="text/javascript" src="scripts/elegir.js"></script>
+    <script type="text/javascript" src="scripts/jsonPeliculas.js"></script>
+    <script type="text/javascript" src="scripts/formulario.js"></script>
+    <link rel="stylesheet" href="styles/index.css">
+    <link rel="stylesheet" href="styles/elementos.css">
+    
+</head>
+<body onload="cargarPagina()">
+    <div class="contenedor container">
+        <header class="header">
+            <div>
+                <svg class="logotipo" viewBox="0 0 100 100" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" version="1.1">
+                    <path class="inner-shape" d="M71.399,19.222c-5.019-3.116-9.753-4.342-14.487-7.459C53.976,9.78,49.904,5.059,46.496,1 c-0.663,6.514-2.651,9.158-4.923,11.046c-4.829,3.776-7.859,4.909-12.025,7.176C26.044,21.016,7.012,32.345,7.012,56.704 S27.559,99,50.379,99s42.609-16.522,42.609-41.541S74.429,21.11,71.399,19.222z M71.947,90.114 c-0.473,0.472-4.829,3.493-9.942,3.965c-5.114,0.472-12.025,0.756-16.192-3.021c-0.663-0.661-0.473-1.605,0-1.983 c0.473-0.377,0.852-0.661,1.42-0.661c0.569,0,0.473,0,0.758,0.189c1.894,1.51,4.734,2.738,10.795,2.738s10.321-1.699,12.215-3.116 c0.852-0.661,1.231-0.094,1.325,0.283C72.42,88.888,72.609,89.454,71.947,90.114z M55.376,81.524 c1.042-0.944,2.745-2.455,4.356-3.116c1.609-0.661,2.462-0.566,3.977-0.566s3.125,0.094,4.261,0.85 c1.136,0.756,1.799,2.455,2.178,3.399c0.378,0.944,0,1.51-0.758,1.889c-0.663,0.377-0.758,0.189-1.42-1.039 c-0.663-1.227-1.231-2.455-4.545-2.455c-3.314,0-4.356,1.133-5.965,2.455c-1.609,1.322-2.178,1.793-2.745,1.039 C54.145,83.223,54.335,82.467,55.376,81.524z M80.468,82.278c-3.409-0.283-10.226-10.858-14.582-11.046 c-5.492-0.189-17.423,11.424-26.796,11.424c-5.681,0-7.386-0.85-9.279-2.077c-2.841-1.983-4.261-5.004-4.167-9.158 c0.095-7.364,7.007-14.257,15.718-14.351c11.079-0.095,18.748,10.952,24.335,10.857c4.734-0.094,13.824-9.347,18.274-9.347 c4.734,0,6.06,4.91,6.06,7.836c0,2.926-0.947,8.214-3.219,11.518C84.54,81.24,83.12,82.467,80.468,82.278z"></path>
+                </svg>
+                <h1>Cines Cristian</h1>
+            </div>
+        </header>
+        <article class="main">
+                <ul class="nav nav-tabs">
+                    <li class="active tabs-li"><a id="tab-detalles" data-toggle="tab" href="#detalles">Detalles</a></li>
+                    <li class="tabs-li"><a id="tab-sala" class="not-active" data-toggle="tab" href="#sala"  disabled>Sala</a></li>
+                    <li class="tabs-li"><a id="tab-pago" class="not-active" data-toggle="tab" href="#pago">Pago</a></li>
+                </ul>
+                      
+                <div class="tab-content">
+                    <div id="detalles" class="tab-pane fade in active">
+                        <div class="row">
+                            <img id="imagenPeli" src="" alt="Portada" class="col-xs-12 col-md-3">
+                            <div class="col-xs-12 col-md-7">
+                                <h3 id="tituloPeli"></h3>
+                                <p id="sinopsisPeli"></p>
+                            </div>
+                            <div class="col-xs-12 col-md-2">
+                                <h4>Horario</h4>
+                                <ul id="listaHorario">
+
+                                </ul>
+                            </div>
+                            <a id="siguienteDetalles" data-toggle="tab" href="#sala" class="btn btn-primary paginas disabled col-xs-12 col-md-6">
+                                Siguiente
+                            </a>
+                        </div>
+                    </div>
+                    <div id="sala" class="tab-pane fade">
+                        <h3 id="salaSeleccionada"></h3>
+                        <div class="row">
+                            <div class="col-xs-12 col-md-5">
+                                <svg id="mysvg" viewbox="0 0 520 500">
+                                    <path class="cuadro" d="M1 0 L520 0 L520 500 L1 500 Z" />
+                                    <symbol id="primero" class="mysymbol" viewbox="0 0 100 100">
+                                        <path d="M25 70 L25 10 L35 5 L65 5 L75 10 L75 70 Z" />
+                                        <rect id="rectangulo" x="1" y="70" width="99" height="29"/>  
+                                        <circle id="circulo" cx="15" cy="70" r="14"/>
+                                        <circle id="circulo" cx="86" cy="70" r="14"/>
+                                    </symbol>
+                                    
+                                    <rect class="emergencias" x="510" y="440" width="10" height="50" />
+                                    <rect class="salidas" x="0" y="440" width="10" height="50" />
+                                    <rect class="pantallas" x="110" y="490" width="300" height="10"/> 
+                                </svg>
+                            </div>
+                            <div class="col-xs-12 col-md-6 datos">
+                                <span>Precio por butaca.</span>
+                                <span class="precioButaca"></span>
+                                <span>Cantidad de butacas.</span>
+                                <span class="cantidadButacas">0</span>
+                                <span>Precio total.</span>
+                                <span class="precioTotal">0.00 €</span>
+                                <br>
+                                <svg id="svgInforma" viewbox="0 0 200 200">
+    
+                                    <rect x="15" y="5"  width="10" height="10" fill="green"/>
+                                    <text x="30" y="15" fill="green">Salida</text>
+                                    <rect x="15" y="25"  width="10" height="10" fill="red"/>
+                                    <text x="30" y="35" fill="red">Salida de emergencia</text>
+                                    <rect x="15" y="45"  width="10" height="10" fill="cyan"/>
+                                    <text x="30" y="55" fill="cyan">Pantalla</text>
+                                      
+                                    <g x="30" y="55" transform="translate(15,60) scale(0.3)" fill="red">
+                                        <path d="M25 70 L25 10 L35 5 L65 5 L75 10 L75 70 Z" />
+                                        <rect id="rectangulo" x="1" y="70" width="99" height="29"/>  
+                                        <circle id="circulo" cx="15" cy="70" r="14"/>
+                                        <circle id="circulo" cx="86" cy="70" r="14"/>
+                                    </g><text x="50" y="85" fill="red">Ocupado</text>
+                                    
+                                    <g x="30" y="55" transform="translate(15,90) scale(0.3)" fill="green">
+                                        <path d="M25 70 L25 10 L35 5 L65 5 L75 10 L75 70 Z" />
+                                        <rect id="rectangulo" x="1" y="70" width="99" height="29"/>  
+                                        <circle id="circulo" cx="15" cy="70" r="14"/>
+                                        <circle id="circulo" cx="86" cy="70" r="14"/>
+                                    </g><text x="50" y="115" fill="green">Seleccionado</text>
+                                    
+                                    <g x="30" y="55" transform="translate(15,120) scale(0.3)" fill="lightcyan">
+                                        <path d="M25 70 L25 10 L35 5 L65 5 L75 10 L75 70 Z" />
+                                        <rect id="rectangulo" x="1" y="70" width="99" height="29"/>  
+                                        <circle id="circulo" cx="15" cy="70" r="14"/>
+                                        <circle id="circulo" cx="86" cy="70" r="14"/>
+                                    </g><text x="50" y="145" fill="lightcyan">Libre</text>
+                                  </svg>
+                            </div>
+                            <a id="anteriorSala" data-toggle="tab" href="#detalles" class="btn btn-primary paginas col-xs-12 col-md-6">
+                                Anterior
+                            </a>
+                            <a id="siguienteSala" data-toggle="tab" href="#pago" class="btn btn-primary paginas disabled col-xs-12 col-md-6">
+                                Siguiente
+                            </a>
+                        </div>
+                    </div>
+                    <div id="pago" class="tab-pane fade">
+                        <h3>Pago</h3>
+                        <div class="row">
+                            <form action="pago.html" class="col-xs-12 col-md-6">
+                                <label for="titular">Titular de la tarjeta.</label>
+                                <input id="titular" type="text" class="form-control" placeholder="Introduzca el nombre del titular">
+                                <p id="errorTitular" class="error">El titular escrito no cumple los requisitos.</p>
+                                <label for="correo">Introduzca su correo.</label>
+                                <input id="correo" type="email" class="form-control" aria-describedby="ayudaEmail" placeholder="Introduzca un correo">
+                                <small id="ayudaEmail" class="form-text text-muted">Introduzca un correo valido. Ejemplo: correo@gmail.com</small>
+                                <label for="repetir">Introduzca su correo.</label>
+                                <input id="repetir" type="email" class="form-control" placeholder="Repita su correo">
+                                <p id="errorCorreo" class="error">El correo no cumple con los requisitos, o ambos correos no son iguales.</p>
+                                <input id="pagar" type="button" value="Pagar" class="btn btn-primary mybutton">
+                            </form>
+                            <div class="col-xs-12 col-md-6 datos">
+                                <span>Precio por butaca.</span>
+                                <span class="precioButaca"></span>
+                                <span>Cantidad de butacas.</span>
+                                <span class="cantidadButacas">0</span>
+                                <span>Precio total.</span>
+                                <span class="precioTotal">0.00 €</span>
+                            </div>
+                            <a id="anteriorPago" data-toggle="tab" href="#sala" class="btn btn-primary paginas col-xs-12 col-md-6">
+                                Anterior
+                            </a>
+                        </div>
+                    </div>
+                </div>
+        </article>
+        <aside class="aside izquierda">
+        </aside>
+        <footer class="footer">
+                <div id="log"></div>
+                <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+                    <img alt="Licencia Creative Commons" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" />
+                </a>
+                <br />
+                <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+                </a>
+                Cristian Ramos Baute
+        </footer>
+    </div>
+</body>
+</html>
